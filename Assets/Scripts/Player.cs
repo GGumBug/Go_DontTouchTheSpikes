@@ -5,6 +5,9 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField]
+    private GameController  gameController;
+
+    [SerializeField]
     private float           moveSpeed = 5;
     [SerializeField]
     private float           jumpForce = 15;
@@ -51,6 +54,8 @@ public class Player : MonoBehaviour
         {
             //벽에 닿으면 플레이어의 방향을 반대로 바꾼다.
             ReverseXDir();
+
+            gameController.CollisionWithWall();
         }
         
     }
