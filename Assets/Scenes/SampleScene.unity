@@ -1234,6 +1234,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameController: {fileID: 1523042695}
+  playerDieEffect: {fileID: 7826459700405420595, guid: 03816651623b2e544a9b443a17064f89, type: 3}
   moveSpeed: 5
   jumpForce: 15
 --- !u!1001 &1117444365
