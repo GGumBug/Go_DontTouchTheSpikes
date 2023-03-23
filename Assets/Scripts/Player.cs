@@ -6,6 +6,8 @@ public class Player : MonoBehaviour
 {
     [SerializeField]
     private GameController  gameController;
+    [SerializeField]
+    private GameObject      playerDieEffect;
 
     [SerializeField]
     private float           moveSpeed = 5;
@@ -56,6 +58,14 @@ public class Player : MonoBehaviour
             ReverseXDir();
 
             gameController.CollisionWithWall();
+        }
+        else if (other.tag.Equals("Spike"))
+        {
+            Instantiate(playerDieEffect, transform.position, Quaternion.identity);
+
+            gameController.GameOver();
+
+            gameObject.SetActive(false);
         }
         
     }

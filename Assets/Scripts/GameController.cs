@@ -13,6 +13,11 @@ public class GameController : MonoBehaviour
         UpdateSpikes();
     }
 
+    public void GameOver()
+    {
+        Debug.Log("GameOver");
+    }
+
     private void UpdateSpikes()
     {
         spikeSpawners[currentSpawn].ActivateAll();
