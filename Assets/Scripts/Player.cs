@@ -5,17 +5,19 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField]
-    private GameController  gameController;
+    private GameController      gameController;
     [SerializeField]
-    private GameObject      playerDieEffect;
+    private GameObject          playerDieEffect;
     [SerializeField]
-    private AudioSource     audioSource;
+    private PlayerTrailSpawner  playerTrailSpawner;
     [SerializeField]
-    private float           moveSpeed = 5;
+    private AudioSource         audioSource;
     [SerializeField]
-    private float           jumpForce = 15;
+    private float               moveSpeed = 5;
+    [SerializeField]
+    private float               jumpForce = 15;
 
-    private Rigidbody2D     rb2D;
+    private Rigidbody2D         rb2D;
 
     private void Awake() {
         audioSource = GetComponent<AudioSource>();
@@ -59,6 +61,8 @@ public class Player : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 JumpTo();
+
+                playerTrailSpawner.OnSpawns();
             }
 
             yield return null;
