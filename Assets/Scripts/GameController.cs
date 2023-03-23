@@ -9,12 +9,14 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private Player player;
     private UIController uiController;
+    private RandomColor randomColor;
     private int currentSpawn = 0;
     private int currentScore = 0;
 
     private void Awake()
     {
         uiController = GetComponent<UIController>();
+        randomColor = GetComponent<RandomColor>();
     }
 
     private IEnumerator Start()
@@ -39,11 +41,13 @@ public class GameController : MonoBehaviour
 
         currentScore++;
         uiController.UpdateScore(currentScore);
+
+        randomColor.OnChange();
     }
 
     public void GameOver()
     {
-        Debug.Log("GameOver");
+        StartCoroutine(nameof(GameOverProcess));
     }
 
     private void UpdateSpikes()
@@ -54,5 +58,25 @@ public class GameController : MonoBehaviour
         currentSpawn = (currentSpawn+1) % spikeSpawners.Length;
 
         spikeSpawners[currentSpawn].DeactivateAll();
+    }
+
+    private IEnumerator GameOverProcess()
+    {
+        if (currentScore > PlayerPrefs.GetInt("HighScore"))
+        {
+            PlayerPrefs.SetInt("HighScore", currentScore);
+        }
+
+        uiController.GameOver();
+
+        while (true)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+            }
+
+            yield return null;
+        }
     }
 }

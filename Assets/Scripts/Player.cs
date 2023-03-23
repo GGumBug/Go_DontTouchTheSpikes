@@ -8,7 +8,8 @@ public class Player : MonoBehaviour
     private GameController  gameController;
     [SerializeField]
     private GameObject      playerDieEffect;
-
+    [SerializeField]
+    private AudioSource     audioSource;
     [SerializeField]
     private float           moveSpeed = 5;
     [SerializeField]
@@ -17,6 +18,8 @@ public class Player : MonoBehaviour
     private Rigidbody2D     rb2D;
 
     private void Awake() {
+        audioSource = GetComponent<AudioSource>();
+
         rb2D = GetComponent<Rigidbody2D>();
         rb2D.isKinematic = true;
 
@@ -83,6 +86,8 @@ public class Player : MonoBehaviour
             ReverseXDir();
 
             gameController.CollisionWithWall();
+
+            audioSource.Play();
         }
         else if (other.tag.Equals("Spike"))
         {

@@ -7,13 +7,19 @@ public class UIController : MonoBehaviour
 {
     [Header("Main")]
     [SerializeField]
-    private GameObject mainPenel;
+    private GameObject      mainPenel;
 
     [Header("InGame")]
     [SerializeField]
-    private GameObject inGamePenel;
+    private GameObject      inGamePenel;
     [SerializeField]
     private TextMeshProUGUI textScore;
+
+    [Header("GameOver")]
+    [SerializeField]
+    private GameObject      gameOverPenel;
+    [SerializeField]
+    private TextMeshProUGUI textHighScore;
 
     public void GameStart()
     {
@@ -33,5 +39,12 @@ public class UIController : MonoBehaviour
             textScore.text = score.ToString();
         }
         
+    }
+
+    public void GameOver()
+    {
+        gameOverPenel.SetActive(true);
+
+        textHighScore.text = $"HIGH SCORE : {PlayerPrefs.GetInt("HighScore")}";
     }
 }
