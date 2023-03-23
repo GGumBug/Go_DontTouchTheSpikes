@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour
     private Player player;
     private UIController uiController;
     private int currentSpawn = 0;
+    private int currentScore = 0;
 
     private void Awake()
     {
@@ -35,6 +36,9 @@ public class GameController : MonoBehaviour
     public void CollisionWithWall()
     {
         UpdateSpikes();
+
+        currentScore++;
+        uiController.UpdateScore(currentScore);
     }
 
     public void GameOver()
