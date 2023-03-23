@@ -18,9 +18,34 @@ public class Player : MonoBehaviour
 
     private void Awake() {
         rb2D = GetComponent<Rigidbody2D>();
+        rb2D.isKinematic = true;
+
+        //rb2D.velocity = new Vector2(moveSpeed, jumpForce);
+        // StartCoroutine(nameof(UpdateInput)); == StartCoroutine("UpdateInput"); 오타로 에러가 날 가능성을 없앤다.
+        //StartCoroutine(nameof(UpdateInput));
+    }
+
+    private IEnumerator Start()
+    {
+        float originY = transform.position.y;
+        float deltaY = 0.5f;
+        float moveSpeedY = 2;
+
+        while (true)
+        {
+            float y = originY + deltaY * Mathf.Sin(Time.time * moveSpeedY);
+            transform.position = new Vector2(transform.position.x, y);
+
+            yield return null;
+        }
+    }
+
+    public void GameStart()
+    {
+        rb2D.isKinematic = false;
         rb2D.velocity = new Vector2(moveSpeed, jumpForce);
 
-        // StartCoroutine(nameof(UpdateInput)); == StartCoroutine("UpdateInput"); 오타로 에러가 날 가능성을 없앤다.
+        StopCoroutine(nameof(Start));
         StartCoroutine(nameof(UpdateInput));
     }
 

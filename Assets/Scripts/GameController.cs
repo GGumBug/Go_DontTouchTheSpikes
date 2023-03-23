@@ -6,7 +6,31 @@ public class GameController : MonoBehaviour
 {
     [SerializeField]
     private SpikeSpawner[] spikeSpawners;
+    [SerializeField]
+    private Player player;
+    private UIController uiController;
     private int currentSpawn = 0;
+
+    private void Awake()
+    {
+        uiController = GetComponent<UIController>();
+    }
+
+    private IEnumerator Start()
+    {
+        while (true)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                player.GameStart();
+                uiController.GameStart();
+
+                yield break;
+            }
+
+            yield return null;
+        }
+    }
 
     public void CollisionWithWall()
     {
